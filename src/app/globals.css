@@ -1,26 +1,114 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  /* === SFV Brand Color Palette === */
+  --color-sfv-purple: #8A2BE2;
+  --color-sfv-purple-vibrant: #7C3AED;
+  --color-sfv-purple-light: #A78BFA;
+  --color-sfv-purple-deep: #5B21B6;
+  --color-sfv-purple-muted: #6D28D9;
+  --color-sfv-glow: #C4B5FD;
+  
+  /* Modern Neutral Dark Palette */
+  --color-sfv-dark: #08090E;
+  --color-sfv-dark-surface: #0E1017;
+  --color-sfv-dark-card: #11121B;
+  --color-sfv-dark-lighter: #181926;
+  
+  --color-sfv-white: #FFFFFF;
+  --color-sfv-slate-100: #F1F5F9;
+  --color-sfv-slate-200: #E2E8F0;
+  --color-sfv-gray: #94A3B8;
+  --color-sfv-gray-dark: #64748B;
+  --color-sfv-border: rgba(255, 255, 255, 0.08);
+  --color-sfv-border-purple: rgba(138, 43, 226, 0.3);
+
+  /* === Typography === */
+  --font-heading: var(--font-space-grotesk);
+  --font-body: var(--font-inter);
+
+  /* === Refined Animations === */
+  --animate-fade-in-up: fade-in-up 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+/* === Keyframes === */
+@keyframes fade-in-up {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
 
+/* === Global Styles === */
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 5rem;
+}
+
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: var(--color-sfv-dark);
+  color: var(--color-sfv-slate-100);
+  font-family: var(--font-body), system-ui, -apple-system, sans-serif;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* === Custom Scrollbar === */
+::-webkit-scrollbar {
+  width: 5px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-sfv-dark);
+}
+
+::-webkit-scrollbar-thumb {
+  background: #202235;
+  border-radius: 2px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-sfv-purple);
+}
+
+/* Firefox scrollbar */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #202235 var(--color-sfv-dark);
+}
+
+/* === Text Selection === */
+::selection {
+  background: rgba(138, 43, 226, 0.35);
+  color: #FFFFFF;
+}
+
+/* === Focus Styles === */
+:focus-visible {
+  outline: 2px solid var(--color-sfv-purple);
+  outline-offset: 2px;
+}
+
+/* === Crisp Solid Surface Utilities (No blurry artificial glass) === */
+.glass {
+  background-color: #0E1018;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.glass-strong {
+  background-color: #0A0B12;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+/* === Refined Typography & Gradients === */
+.gradient-text {
+  background: linear-gradient(180deg, #FFFFFF 40%, #D4D4D8 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
