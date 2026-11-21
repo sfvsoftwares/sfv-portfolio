@@ -15,7 +15,7 @@
 - **Canais Oficiais:**
   - WhatsApp Comercial: `+55 (71) 99132-9737`
   - E-mail: `sfv.softwares@gmail.com`
-  - Instagram: `@sfv.softwares`
+  - Instagram: `@sfvsoftwares`
   - Domínio / URL Base: `https://sfvsoftwares.com`
   - Hospedagem (Fase 1): **Cloudflare Pages** (modo Static Export — pasta `out/`)
 

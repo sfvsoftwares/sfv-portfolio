@@ -105,7 +105,7 @@ export default async function LocaleLayout({ children, params }: LocaleLayoutPro
               'SEO Técnico',
             ],
             sameAs: [
-              'https://instagram.com/sfv.softwares',
+              'https://instagram.com/sfvsoftwares',
             ],
           }),
         }}

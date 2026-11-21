@@ -403,7 +403,7 @@ export default function ContactSection({ contact }: ContactSectionProps) {
               </a>
 
               <a
-                href="https://instagram.com/sfv.softwares"
+                href="https://instagram.com/sfvsoftwares"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="block group"
@@ -417,7 +417,7 @@ export default function ContactSection({ contact }: ContactSectionProps) {
                       {contact.info.social_label}
                     </span>
                     <span className="text-sm font-medium text-white group-hover:text-purple-200 transition-colors">
-                      @sfv.softwares
+                      @sfvsoftwares
                     </span>
                   </div>
                 </div>

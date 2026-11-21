@@ -59,7 +59,7 @@ export default function Footer({ footer, nav }: FooterProps) {
             {/* Social channels */}
             <div className="flex items-center gap-2.5">
               <a
-                href="https://instagram.com/sfv.softwares"
+                href="https://instagram.com/sfvsoftwares"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="p-2.5 rounded-lg border border-white/[0.08] text-slate-400 hover:text-white hover:border-purple-500/40 hover:bg-purple-500/10 transition-all"
@@ -134,13 +134,13 @@ export default function Footer({ footer, nav }: FooterProps) {
               </li>
               <li>
                 <a
-                  href="https://instagram.com/sfv.softwares"
+                  href="https://instagram.com/sfvsoftwares"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-center gap-2.5 text-xs text-slate-400 hover:text-white transition-colors"
                 >
                   <InstagramIcon size={14} className="text-purple-400 flex-shrink-0" />
-                  <span>@sfv.softwares</span>
+                  <span>@sfvsoftwares</span>
                 </a>
               </li>
             </ul>
