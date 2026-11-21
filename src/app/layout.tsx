@@ -15,13 +15,13 @@ const inter = Inter({
 });
 
 export const viewport: Viewport = {
-  themeColor: "#0A0A1A",
+  themeColor: "#08090E",
   width: "device-width",
   initialScale: 1,
 };
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://sfv.dev"),
+  metadataBase: new URL("https://sfvsoftwares.com"),
   robots: {
     index: true,
     follow: true,

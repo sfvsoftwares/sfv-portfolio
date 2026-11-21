@@ -61,9 +61,11 @@ export const dictionary = {
     kicker: "// OUR SERVICES",
     title: "Digital solutions designed for your sustained growth",
     subtitle: "From authoritative brand positioning to tailor-made web platforms.",
+    cta_label: "Request a proposal for this service",
     items: [
       {
         badge: "Authority",
+        project_type: "portfolio",
         title: "Portfolios & Personal Websites",
         description: "For consultants, executives, doctors, lawyers, and creators who need a sophisticated digital presence to win high-ticket contracts.",
         tags: ["Editorial Design", "Next.js", "Personal SEO", "Mobile-First"],
@@ -71,6 +73,7 @@ export const dictionary = {
       },
       {
         badge: "Corporate",
+        project_type: "institutional",
         title: "High-Standard Corporate Websites",
         description: "Showcase your company with modern credibility. Fast-loading pages, solution catalogs, multi-language support, and enterprise structure.",
         tags: ["Security", "Multi-language", "99+ Performance", "Analytics"],
@@ -78,6 +81,7 @@ export const dictionary = {
       },
       {
         badge: "Conversion",
+        project_type: "landing_page",
         title: "Strategic Landing Pages",
         description: "Ultra-optimized pages designed exclusively to turn paid traffic into qualified leads and direct sales via WhatsApp or checkout.",
         tags: ["Structured Copy", "Sub-second Load", "Pixel & Tracking", "A/B Ready"],
@@ -85,6 +89,7 @@ export const dictionary = {
       },
       {
         badge: "Engineering",
+        project_type: "web_system",
         title: "Custom Web Systems & Platforms",
         description: "Admin dashboards, client portals, and bespoke automations to retire messy spreadsheets and streamline business operations.",
         tags: ["REST APIs", "Databases", "Authentication", "Dashboards"],
@@ -130,21 +135,25 @@ export const dictionary = {
     subtitle: "Modern architectures ready to be customized to your company's identity.",
     coming_soon: "Pioneer Partner Program",
     coming_soon_description: "We are onboarding our first landmark projects with special launch terms and direct engineering leadership access.",
+    concept_cta: "I want a project like this",
     concepts: [
       {
         category: "Presence & Authority",
+        project_type: "portfolio",
         title: "Editorial & Executive Portfolio",
         description: "Minimalist interface emphasizing storytelling, case presentation, and direct outreach for independent consultants and leaders.",
         features: ["Minimalist UI", "Next.js SSR", "Structured SEO"],
       },
       {
         category: "Performance & Traffic",
+        project_type: "landing_page",
         title: "High-Conversion Landing Page",
         description: "Traffic-driven structure engineered with rapid decision triggers and seamless integration with WhatsApp and CRM pipelines.",
         features: ["Sub-1s Speed", "Full Tracking", "Zero Friction"],
       },
       {
         category: "Enterprise & Platforms",
+        project_type: "institutional",
         title: "Corporate Portal & Business Hub",
         description: "Multi-page architecture with native bilingual support, service index, and dynamic authenticated forms.",
         features: ["Native i18n", "Complete Security", "High Scalability"],
@@ -190,8 +199,16 @@ export const dictionary = {
     title: "Bring your digital vision to life with real software engineers",
     subtitle: "Fill out the form below for a swift response, or reach out directly on WhatsApp.",
     direct_cta: "Prefer to talk right now?",
+    direct_description: "Our direct WhatsApp channel is open to answer questions, estimate timelines, or schedule a discovery call.",
     whatsapp_button: "Chat on WhatsApp",
     form: {
+      project_type: "Project type",
+      project_types: [
+        { id: "landing_page", label: "Strategic Landing Page", desc: "Focused on conversion & paid traffic" },
+        { id: "portfolio", label: "Executive Portfolio", desc: "Authority for professionals & leaders" },
+        { id: "institutional", label: "Corporate Website", desc: "Complete corporate digital presence" },
+        { id: "web_system", label: "Custom Web System", desc: "Dashboards, portals & automations" },
+      ],
       name: "Full name",
       name_placeholder: "What should we call you?",
       email: "Contact email",
@@ -201,7 +218,16 @@ export const dictionary = {
       submit: "Send Message to SFV",
       sending: "Sending request...",
       success: "Message received successfully! We will get back to you shortly.",
+      success_detail: "A WhatsApp chat has been opened with your project summary for immediate assistance.",
+      send_another: "Send another request",
       error: "Oops! Something went wrong. Please reach out via WhatsApp.",
+      whatsapp_template: {
+        greeting: "Hello, SFV! I came from your website and would like to discuss a project.",
+        name_label: "Name",
+        project_label: "Project type",
+        email_label: "Email",
+        details_label: "Project details",
+      },
     },
     info: {
       email_label: "Direct Email",

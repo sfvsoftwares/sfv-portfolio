@@ -18,8 +18,10 @@ interface ServicesSectionProps {
     kicker?: string;
     title: string;
     subtitle: string;
+    cta_label?: string;
     items: {
       badge?: string;
+      project_type?: string;
       title: string;
       description: string;
       tags?: string[];
@@ -29,7 +31,12 @@ interface ServicesSectionProps {
 }
 
 export default function ServicesSection({ services }: ServicesSectionProps) {
-  const scrollToContact = () => {
+  const scrollToContact = (projectType?: string) => {
+    if (projectType) {
+      window.dispatchEvent(
+        new CustomEvent('sfv:select-project', { detail: projectType })
+      );
+    }
     const el = document.getElementById('contact');
     if (el) {
       el.scrollIntoView({ behavior: 'smooth' });
@@ -88,7 +95,7 @@ export default function ServicesSection({ services }: ServicesSectionProps) {
                         <IconComponent size={22} />
                       </div>
                       {item.badge && (
-                        <span className="text-[11px] font-mono tracking-wider uppercase px-3 py-1 rounded-full border border-purple-500/20 bg-purple-950/30 text-purple-300">
+                        <span className="text-[11px] font-mono tracking-wider uppercase px-3 py-1 rounded-md border border-purple-500/20 bg-purple-950/30 text-purple-300">
                           {item.badge}
                         </span>
                       )}
@@ -121,10 +128,10 @@ export default function ServicesSection({ services }: ServicesSectionProps) {
                     )}
 
                     <button
-                      onClick={scrollToContact}
+                      onClick={() => scrollToContact(item.project_type)}
                       className="inline-flex items-center gap-1.5 text-xs font-medium text-purple-400 group-hover:text-purple-300 transition-colors cursor-pointer"
                     >
-                      <span>Solicitar proposta para este serviço</span>
+                      <span>{services.cta_label || 'Solicitar proposta para este serviço'}</span>
                       <ArrowUpRight size={13} className="transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
                     </button>
                   </div>

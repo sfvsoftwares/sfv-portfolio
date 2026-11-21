@@ -16,7 +16,8 @@
   - WhatsApp Comercial: `+55 (71) 99132-9737`
   - E-mail: `sfv.softwares@gmail.com`
   - Instagram: `@sfv.softwares`
-  - Domínio / URL Base: `https://sfv.dev`
+  - Domínio / URL Base: `https://sfvsoftwares.com`
+  - Hospedagem (Fase 1): **Cloudflare Pages** (modo Static Export — pasta `out/`)
 
 ---
 
@@ -84,16 +85,20 @@ sfv-portfolio/
 ├── CLAUDE.md                     # Links de contexto para agentes
 ├── AGENTS.md                     # Regras específicas do Next.js
 ├── public/
+│   ├── _headers                  # Headers de segurança nativos do Cloudflare Pages
+│   ├── _redirects                # Redirecionamento da raiz (/) para /pt-BR no Cloudflare Pages
 │   ├── logo.svg                  # Vetor da logo SFV (transparente, viewBox 160 415 1260 545)
 │   └── favicon.ico               # Ícone do navegador
 ├── src/
 │   ├── app/
 │   │   ├── [locale]/
-│   │   │   ├── layout.tsx        # Layout por idioma com metadados SEO e Schema.org
+│   │   │   ├── layout.tsx        # Layout por idioma com metadados SEO, canonical e Schema.org (ProfessionalService + Organization)
 │   │   │   └── page.tsx          # Página principal que orquestra as seções
 │   │   ├── globals.css           # Estilos globais Tailwind v4 e utilitários de vidro/fundo
-│   │   ├── layout.tsx            # Root layout com Space Grotesk e Inter
-│   │   └── page.tsx              # Redirecionamento automático para /[defaultLocale]
+│   │   ├── layout.tsx            # Root layout com Space Grotesk, Inter e metadataBase (sfvsoftwares.com)
+│   │   ├── page.tsx              # Redirecionamento estático (client-side + meta refresh) para /[defaultLocale]
+│   │   ├── robots.ts             # robots.txt compatível com export estático
+│   │   └── sitemap.ts            # sitemap.xml compatível com export estático
 │   ├── components/
 │   │   ├── layout/
 │   │   │   ├── Navbar.tsx        # Header fixo com Logo, scroll spy, switch de idioma e CTA
@@ -101,11 +106,11 @@ sfv-portfolio/
 │   │   ├── sections/
 │   │   │   ├── HeroSection.tsx   # Hero com Logo central, status pill, headline e trust badges
 │   │   │   ├── AboutSection.tsx  # Quem Somos, posicionamento e 4 pilares de engenharia
-│   │   │   ├── ServicesSection.tsx # 4 serviços com badges, tags e link direto de proposta
+│   │   │   ├── ServicesSection.tsx # 4 serviços com badges, tags e link direto que pré-seleciona o tipo de projeto no contato
 │   │   │   ├── ProcessSection.tsx  # Timeline de 5 passos da metodologia de entrega
 │   │   │   ├── PortfolioSection.tsx# 3 conceitos/arquétipos de produtos e chamada para parceiros
 │   │   │   ├── TestimonialsSection.tsx # Pilares de confiança e garantias SFV
-│   │   │   └── ContactSection.tsx  # Formulário com disparo via WhatsApp e canais diretos
+│   │   │   └── ContactSection.tsx  # Formulário com qualificação de tipo de projeto, disparo estruturado via WhatsApp e canais diretos
 │   │   └── ui/
 │   │       ├── AnimatedText.tsx  # Revelação de títulos sem saltos bruscos
 │   │       ├── CircuitGrid.tsx   # Fundo ambiente com iluminação radial suave e grid estático
@@ -150,12 +155,11 @@ sfv-portfolio/
 # Rodar servidor de desenvolvimento
 npm run dev
 
-# Rodar verificação e build de produção
+# Rodar verificação e build estático de produção (gera pasta out/ para Cloudflare Pages)
 npm run build
-
-# Iniciar build de produção
-npm run start
 ```
+
+> **Static Export (Cloudflare Pages):** `next.config.ts` utiliza `output: "export"` e `images: { unoptimized: true }`. Não utilize `next start` ou headers dinâmicos em `next.config.ts`; cabeçalhos HTTP e redirecionamentos de borda ficam em `public/_headers` e `public/_redirects`.
 
 ### Como Adicionar ou Modificar Textos
 1. Abra `src/i18n/dictionaries/pt-BR.ts` e faça as alterações desejadas.

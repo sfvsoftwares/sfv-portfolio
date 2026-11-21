@@ -30,6 +30,7 @@ export async function generateMetadata({
     openGraph: {
       title: dict.metadata.title,
       description: dict.metadata.description,
+      url: `https://sfvsoftwares.com/${locale}`,
       locale: locale === 'pt-BR' ? 'pt_BR' : 'en_US',
       type: 'website',
       siteName: 'SFV — Soluções Feitas para Você',
@@ -40,9 +41,11 @@ export async function generateMetadata({
       description: dict.metadata.description,
     },
     alternates: {
+      canonical: `/${locale}`,
       languages: {
         'pt-BR': '/pt-BR',
         'en': '/en',
+        'x-default': '/pt-BR',
       },
     },
   };
@@ -64,13 +67,43 @@ export default async function LocaleLayout({ children, params }: LocaleLayoutPro
         dangerouslySetInnerHTML={{
           __html: JSON.stringify({
             '@context': 'https://schema.org',
-            '@type': 'Organization',
+            '@type': ['ProfessionalService', 'Organization'],
+            '@id': 'https://sfvsoftwares.com/#organization',
             name: 'SFV — Soluções Feitas para Você',
+            alternateName: 'SFV Softwares',
             description: dict.metadata.description,
-            url: 'https://sfv.dev',
+            url: 'https://sfvsoftwares.com',
+            logo: 'https://sfvsoftwares.com/logo.svg',
+            image: 'https://sfvsoftwares.com/logo.svg',
             email: 'sfv.softwares@gmail.com',
-            telephone: '+5571991329737',
-            areaServed: 'BR',
+            telephone: '+55-71-99132-9737',
+            priceRange: '$$',
+            address: {
+              '@type': 'PostalAddress',
+              addressLocality: 'Salvador',
+              addressRegion: 'BA',
+              addressCountry: 'BR',
+            },
+            geo: {
+              '@type': 'GeoCoordinates',
+              latitude: -12.9777,
+              longitude: -38.5016,
+            },
+            areaServed: [
+              { '@type': 'City', name: 'Salvador' },
+              { '@type': 'State', name: 'Bahia' },
+              { '@type': 'Country', name: 'BR' },
+            ],
+            knowsAbout: [
+              'Desenvolvimento Web',
+              'Next.js',
+              'TypeScript',
+              'Landing Pages de Alta Conversão',
+              'Sites Institucionais',
+              'Portfólios Executivos',
+              'Sistemas Web Sob Medida',
+              'SEO Técnico',
+            ],
             sameAs: [
               'https://instagram.com/sfv.softwares',
             ],

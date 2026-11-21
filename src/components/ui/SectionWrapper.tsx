@@ -16,7 +16,7 @@ export default function SectionWrapper({ id, className = '', children, delay = 0
   return (
     <motion.section
       id={id}
-      ref={ref as any}
+      ref={ref}
       style={{ contentVisibility: 'auto' }}
       className={`relative w-full ${className}`}
       initial={{ opacity: 0, y: 50 }}

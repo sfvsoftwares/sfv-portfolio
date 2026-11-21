@@ -22,9 +22,11 @@ export default function CircuitGrid({ opacity = 0.15 }: CircuitGridProps) {
     const ctx = canvas.getContext('2d');
     if (!ctx) return;
 
-    let animationFrameId: number;
+    let animationFrameId = 0;
     let width = window.innerWidth;
     let height = window.innerHeight;
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const isMobileViewport = width < 768;
 
     // Mouse tracking with smooth lerp
     const mouseTarget = { x: -1000, y: -1000, active: false };
@@ -38,12 +40,12 @@ export default function CircuitGrid({ opacity = 0.15 }: CircuitGridProps) {
       canvas.height = height * dpr;
       canvas.style.width = `${width}px`;
       canvas.style.height = `${height}px`;
-      ctx.scale(dpr, dpr);
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
     };
 
     setupDPI();
 
-    const gridSize = 45;
+    const gridSize = isMobileViewport ? 72 : 45;
     const dots: { x: number; y: number }[] = [];
     const lines: { start: number; end: number; active: boolean; progress: number; speed: number }[] = [];
 
@@ -186,8 +188,8 @@ export default function CircuitGrid({ opacity = 0.15 }: CircuitGridProps) {
         ctx.lineTo(end.x, end.y);
         ctx.stroke();
 
-        // Randomly trigger signal pulses
-        if (!line.active && Math.random() < 0.006) {
+        // Randomly trigger signal pulses (only when motion is enabled)
+        if (!prefersReducedMotion && !line.active && Math.random() < 0.006) {
           line.active = true;
           line.progress = 0;
         }
@@ -218,8 +220,8 @@ export default function CircuitGrid({ opacity = 0.15 }: CircuitGridProps) {
         ctx.fill();
       }
 
-      // 3. Interactive circuits following the mouse
-      if (mousePos.opacity > 0.02) {
+      // 3. Interactive circuits following the mouse (desktop / non-reduced motion)
+      if (!prefersReducedMotion && mousePos.opacity > 0.02) {
         const mouseRadius = 220;
 
         // Find closest nodes to mouse
@@ -328,13 +330,16 @@ export default function CircuitGrid({ opacity = 0.15 }: CircuitGridProps) {
         ctx.stroke();
       }
 
-      animationFrameId = requestAnimationFrame(render);
+      if (!prefersReducedMotion && !document.hidden) {
+        animationFrameId = requestAnimationFrame(render);
+      }
     };
 
     render();
 
     // Mouse & Touch event listeners
     const handlePointerMove = (e: PointerEvent) => {
+      if (prefersReducedMotion) return;
       mouseTarget.x = e.clientX;
       mouseTarget.y = e.clientY;
       mouseTarget.active = true;
@@ -346,27 +351,39 @@ export default function CircuitGrid({ opacity = 0.15 }: CircuitGridProps) {
 
     const handleResize = () => {
       setupDPI();
+      if (prefersReducedMotion) {
+        render();
+      }
+    };
+
+    const handleVisibilityChange = () => {
+      if (!document.hidden && !prefersReducedMotion) {
+        cancelAnimationFrame(animationFrameId);
+        animationFrameId = requestAnimationFrame(render);
+      }
     };
 
     window.addEventListener('pointermove', handlePointerMove, { passive: true });
     window.addEventListener('pointerdown', handlePointerMove, { passive: true });
     window.addEventListener('pointerleave', handlePointerLeave, { passive: true });
     window.addEventListener('resize', handleResize);
+    document.addEventListener('visibilitychange', handleVisibilityChange);
 
     return () => {
       window.removeEventListener('pointermove', handlePointerMove);
       window.removeEventListener('pointerdown', handlePointerMove);
       window.removeEventListener('pointerleave', handlePointerLeave);
       window.removeEventListener('resize', handleResize);
+      document.removeEventListener('visibilitychange', handleVisibilityChange);
       cancelAnimationFrame(animationFrameId);
     };
   }, [opacity]);
 
   return (
     <div className="fixed inset-0 pointer-events-none z-[-1] overflow-hidden">
-      {/* Top subtle ambient purple glow */}
+      {/* Top subtle ambient purple glow (radial gradient, zero GPU blur cost) */}
       <div
-        className="absolute top-[-15%] left-1/2 -translate-x-1/2 w-[700px] h-[450px] bg-purple-900/15 rounded-full blur-[140px]"
+        className="absolute top-[-15%] left-1/2 -translate-x-1/2 w-[760px] h-[480px] rounded-full bg-[radial-gradient(ellipse_at_center,rgba(88,28,135,0.18)_0%,transparent_70%)]"
         aria-hidden="true"
       />
 

@@ -13,8 +13,10 @@ interface PortfolioSectionProps {
     subtitle: string;
     coming_soon?: string;
     coming_soon_description?: string;
+    concept_cta?: string;
     concepts?: {
       category: string;
+      project_type?: string;
       title: string;
       description: string;
       features: string[];
@@ -28,7 +30,12 @@ interface PortfolioSectionProps {
 }
 
 export default function PortfolioSection({ portfolio }: PortfolioSectionProps) {
-  const scrollToContact = () => {
+  const scrollToContact = (projectType?: string) => {
+    if (projectType) {
+      window.dispatchEvent(
+        new CustomEvent('sfv:select-project', { detail: projectType })
+      );
+    }
     const el = document.getElementById('contact');
     if (el) {
       el.scrollIntoView({ behavior: 'smooth' });
@@ -81,7 +88,7 @@ export default function PortfolioSection({ portfolio }: PortfolioSectionProps) {
                     <div>
                       {/* Top Category Badge */}
                       <div className="flex items-center justify-between mb-4">
-                        <span className="text-[11px] font-mono tracking-wider uppercase text-purple-300 bg-purple-950/40 border border-purple-500/20 px-2.5 py-1 rounded-full">
+                        <span className="text-[11px] font-mono tracking-wider uppercase text-purple-300 bg-purple-950/40 border border-purple-500/20 px-2.5 py-1 rounded-md">
                           {concept.category}
                         </span>
                         <span className="text-xs font-mono text-slate-500">
@@ -112,10 +119,10 @@ export default function PortfolioSection({ portfolio }: PortfolioSectionProps) {
                       </div>
 
                       <button
-                        onClick={scrollToContact}
+                        onClick={() => scrollToContact(concept.project_type)}
                         className="inline-flex items-center gap-1.5 text-xs font-medium text-purple-400 group-hover:text-purple-300 transition-colors cursor-pointer"
                       >
-                        <span>Quero algo nesse modelo</span>
+                        <span>{portfolio.concept_cta || 'Quero um projeto nesse padrão'}</span>
                         <ArrowUpRight size={13} className="transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
                       </button>
                     </div>
@@ -147,7 +154,7 @@ export default function PortfolioSection({ portfolio }: PortfolioSectionProps) {
             </div>
 
             <button
-              onClick={scrollToContact}
+              onClick={() => scrollToContact()}
               className="flex-shrink-0 px-6 py-3 rounded-lg text-xs font-mono font-semibold uppercase tracking-wider text-white bg-purple-600 hover:bg-purple-500 transition-colors shadow-sm cursor-pointer"
             >
               {portfolio.cta_card?.button || 'Solicitar Proposta Sob Medida'}

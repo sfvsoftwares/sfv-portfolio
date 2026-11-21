@@ -75,7 +75,7 @@ export default function ProcessSection({ process }: ProcessSectionProps) {
                 >
                   {/* Step Number Indicator Node */}
                   <div className="absolute left-6 md:left-1/2 -translate-x-1/2 flex items-center justify-center w-12 h-12 z-10">
-                    <div className="w-10 h-10 rounded-full bg-[#0E1018] border border-purple-500/40 shadow-[0_0_15px_rgba(138,43,226,0.25)] flex items-center justify-center">
+                    <div className="w-10 h-10 rounded-lg bg-[#0E1018] border border-purple-500/40 flex items-center justify-center">
                       <span className="text-purple-300 font-mono text-xs font-bold">
                         {stepNumber}
                       </span>
@@ -88,7 +88,7 @@ export default function ProcessSection({ process }: ProcessSectionProps) {
                       isEven ? 'md:pl-12' : 'md:pr-12 md:text-right'
                     }`}
                   >
-                    <div className="rounded-2xl border border-white/[0.07] bg-[#0E1018]/80 backdrop-blur-md p-6 hover:border-purple-500/30 transition-all">
+                    <div className="rounded-xl border border-white/[0.08] bg-[#0E1018] p-6 hover:border-purple-500/40 transition-colors">
                       <h3 className="text-lg font-bold font-heading text-white mb-2">
                         {step.title}
                       </h3>

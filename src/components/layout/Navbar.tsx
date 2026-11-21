@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect, useRef } from 'react';
+import { useRouter } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X, ArrowUpRight } from 'lucide-react';
 import type { Locale } from '@/i18n';
@@ -32,6 +33,7 @@ const navLinks = [
 ];
 
 export default function Navbar({ locale, nav }: NavbarProps) {
+  const router = useRouter();
   const [isScrolled, setIsScrolled] = useState(false);
   const [isVisible, setIsVisible] = useState(true);
   const [activeSection, setActiveSection] = useState('hero');
@@ -96,7 +98,7 @@ export default function Navbar({ locale, nav }: NavbarProps) {
 
   const switchLocale = () => {
     const newLocale = locale === 'pt-BR' ? 'en' : 'pt-BR';
-    window.location.href = `/${newLocale}`;
+    router.push(`/${newLocale}`);
   };
 
   return (
@@ -208,7 +210,7 @@ export default function Navbar({ locale, nav }: NavbarProps) {
                 <div className="mb-4 pb-4 border-b border-white/[0.08]">
                   <Logo size="sm" showText={false} />
                 </div>
-                {navLinks.map((link, i) => (
+                {navLinks.map((link) => (
                   <button
                     key={link.id}
                     onClick={() => scrollToSection(link.id)}
