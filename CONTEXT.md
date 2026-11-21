@@ -95,6 +95,7 @@ sfv-portfolio/
 │   │   │   ├── layout.tsx        # Layout por idioma com metadados SEO, canonical e Schema.org (ProfessionalService + Organization)
 │   │   │   └── page.tsx          # Página principal que orquestra as seções
 │   │   ├── globals.css           # Estilos globais Tailwind v4 e utilitários de vidro/fundo
+│   │   ├── icon.svg              # Favicon vetorial oficial da SFV
 │   │   ├── layout.tsx            # Root layout com Space Grotesk, Inter e metadataBase (sfvsoftwares.com)
 │   │   ├── page.tsx              # Redirecionamento estático (client-side + meta refresh) para /[defaultLocale]
 │   │   ├── robots.ts             # robots.txt compatível com export estático
